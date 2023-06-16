@@ -120,12 +120,9 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5675);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1853);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6197);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([framer_motion__WEBPACK_IMPORTED_MODULE_5__]);
-framer_motion__WEBPACK_IMPORTED_MODULE_5__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
-
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6197);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([framer_motion__WEBPACK_IMPORTED_MODULE_4__]);
+framer_motion__WEBPACK_IMPORTED_MODULE_4__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -133,12 +130,26 @@ framer_motion__WEBPACK_IMPORTED_MODULE_5__ = (__webpack_async_dependencies__.the
 
 function Navbar() {
     const [navbar, setNavbar] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
-    const handleClick = ()=>{
+    const [activeNavItem, setActiveNavItem] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("");
+    const handleClick = (navItem)=>{
+        setActiveNavItem(navItem);
         setNavbar(!navbar);
     };
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        let timeoutId;
+        if (activeNavItem && navbar) {
+            timeoutId = setTimeout(()=>{
+                setNavbar(false);
+            }, 4000); // Set the delay here (in milliseconds)
+        }
+        return ()=>clearTimeout(timeoutId);
+    }, [
+        activeNavItem,
+        navbar
+    ]);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("nav", {
-        className: "w-full top-0 h-25 shadow-lg fixed lg:mb-8 backdrop-blur-sm bg-space1-3/60 opacity-100 hover:bg-space1-1 ...",
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(framer_motion__WEBPACK_IMPORTED_MODULE_5__.motion.main, {
+        className: "transition-opacity duration-500 w-full top-0 h-25 shadow-lg fixed lg:mb-8 backdrop-blur-sm bg-space1-3/60 opacity-100 z-50 hover:bg-space1-2 ...",
+        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(framer_motion__WEBPACK_IMPORTED_MODULE_4__.motion.main, {
             initial: {
                 opacity: 0
             },
@@ -163,7 +174,7 @@ function Navbar() {
                                         src: "/images/space1logo4.png",
                                         width: 80,
                                         height: 30,
-                                        alt: "Space1tech Logo"
+                                        alt: "Avista Beach Resort Logo"
                                     })
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -201,79 +212,104 @@ function Navbar() {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: `flex-2 justify-self-center pl-2 ... tracking-tight pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`,
+                            className: `flex-2 justify-self-center pl-2 ... text-space1-4 tracking-tight pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`,
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 className: "space-x-4 text-lg",
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
                                     className: "mb-4 mt-2 items-center pr-16 font-medium text-sm... justify-center space-y-8 md:flex md:space-x-4 md:space-y-0",
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-4 hover:text-space1-2",
+                                            className: `text-space1-4 hover:text-avista ${activeNavItem === "home" ? "active" : ""}`,
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
                                                 href: "/",
+                                                onClick: ()=>handleClick("home"),
                                                 children: "HOME"
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-4 hover:text-space1-2",
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "about" ? "active" : ""}`,
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
                                                 href: "/navlinks/about",
+                                                onClick: ()=>handleClick("about"),
                                                 children: "About"
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-4 hover:text-space1-2",
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "experiences" ? "active" : ""}`,
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
                                                 href: "/navlinks/experiences",
-                                                children: "Gallery"
+                                                onClick: ()=>handleClick("experiences"),
+                                                children: "Founder Story"
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-4 hover:text-space1-2",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
-                                                href: "/navlinks/gallery",
-                                                children: "Academy"
-                                            })
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-4 hover:text-space1-2",
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "eventsspot" ? "active" : ""}`,
                                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
-                                                href: "/navlinks/gallery",
+                                                href: "/navlinks/eventsspot",
+                                                onClick: ()=>handleClick("eventsspot"),
                                                 children: [
                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                        className: "font-black text-space1-2",
-                                                        children: "Space1"
+                                                        className: "font-black text-space1-5",
+                                                        children: "future"
                                                     }),
-                                                    "TEAM"
+                                                    "Projects"
                                                 ]
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-4 hover:text-space1-2",
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "gallery" ? "active" : ""}`,
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
+                                                href: "/navlinks/gallery",
+                                                onClick: ()=>handleClick("gallery"),
+                                                children: "Gallery"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "roomdetails" ? "active" : ""}`,
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
+                                                href: "/navlinks/roomdetails",
+                                                onClick: ()=>handleClick("roomdetails"),
+                                                children: "Web Application Projects"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "daypassbookings" ? "active" : ""}`,
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
                                                 href: "/navlinks/daypassbookings",
-                                                children: "Designs"
+                                                onClick: ()=>handleClick("daypassbookings"),
+                                                children: "Mobile Application Projects"
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-4 hover:text-space1-2",
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "daypassbookings" ? "active" : ""}`,
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
+                                                href: "/navlinks/daypassbookings",
+                                                onClick: ()=>handleClick("daypassbookings"),
+                                                children: "Visual Design Projects"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "daypassbookings" ? "active" : ""}`,
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
+                                                href: "/navlinks/daypassbookings",
+                                                onClick: ()=>handleClick("daypassbookings"),
+                                                children: "Visual Animation Projects"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                            className: `text-avista3 hover:text-avista ${activeNavItem === "overnightbookings" ? "active" : ""}`,
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
                                                 href: "/navlinks/overnightbookings",
-                                                children: "Development"
-                                            })
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                            className: "text-space1-2 hover:text-space1-4 text-bold font-black",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
-                                                href: "/navlinks/about",
-                                                children: "theFutureProject"
+                                                onClick: ()=>handleClick("overnightbookings"),
+                                                children: "GIGBooking"
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "bg-space1-2 pr-4 hover:bg-space1-4/50 rounded-xl h-7 w-18 lg:h-8 lg:w-35 sm:h-8 sm:w-35  shadow-md",
+                                            className: "bg-avista3 pr-4 hover:bg-space1-4/50 rounded-xl h-7 w-18 lg:h-8 lg:w-35 sm:h-8 sm:w-35  shadow-md",
                                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
-                                                href: "/navlinks/booknow",
+                                                href: "/navlinks/checkout",
                                                 className: "text-space1-4 pl-4 mr-4 text-lg mx-8 lg:my-20",
+                                                onClick: ()=>handleClick("checkout"),
                                                 children: [
                                                     "CHECK",
                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
@@ -455,13 +491,6 @@ module.exports = require("next/dist/shared/lib/utils.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/utils/warn-once.js");
-
-/***/ }),
-
-/***/ 1853:
-/***/ ((module) => {
-
-module.exports = require("next/router");
 
 /***/ }),
 
